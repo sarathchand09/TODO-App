@@ -1,0 +1,70 @@
+<div class="skin-blue">
+  <div class="wrapper" style="height: auto;min-height: 100%">
+
+    <header class="main-header">
+      <a class="logo">TODO</a>
+      <nav class="navbar navbar-static-top" role="navigation"></nav>
+    </header>
+
+    <aside class="main-sidebar">
+      <div class="sidebar">
+        <ul class="nav sidebar-menu" style="cursor: pointer">
+          <li><a> Dashboard</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <div class="content-wrapper">
+      <div class="content-header">
+        <h2> All TODO Tasks </h2>
+
+
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <!--<th>ID</th>-->
+            <th>Task Name</th>
+            <th>Description</th>
+            <th>Status</th>
+            <!--<th>Created Date</th>-->
+            <th>Edit/Update</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let task of tasks;let i = index" [attr.data-index]="i">
+            <!--<td>{{task.id}}</td>-->
+            <td>{{task.name}}</td>
+            <td>{{task.description}}</td>
+            <td>{{task.status}}</td>
+            <!--<td>{{task.createdTime}}</td>-->
+            <td style="width: 2%">
+              <i style="cursor: pointer" class="glyphicon" (click)="updateTask(i)" [ngClass]="{'glyphicon-ok':task.status!='NEW'
+             ,'glyphicon-fire':task.status=='NEW'}"></i>
+              <i style="cursor: pointer" (click)="removeTask(i)" class="glyphicon glyphicon-remove"></i>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+
+        <button class="btn btn-success" (click)="addTaskClick=!addTaskClick">
+          ADD TODO
+        </button>
+
+        <div *ngIf="addTaskClick" class="container"><br/>
+          <div class="row">
+            Name:<input type="text" [(ngModel)]="addTask.name">
+            Status:<select type="text" [(ngModel)]="addTask.status">
+            <option>NEW</option>
+            <!--<option>IN_PROGRESS</option>-->
+            <option>COMPLETED</option>
+          </select>
+            Description: <input type="text" [(ngModel)]="addTask.description">
+          </div>
+          <br/><br/>
+          <button class="btn btn-primary" (click)="addNewTask()" [disabled]="addTask.name==''">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
